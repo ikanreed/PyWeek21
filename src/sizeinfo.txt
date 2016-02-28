@@ -1,0 +1,7 @@
+items area:
+209x642
+
+ starts at y=94
+x=783
+
+96
