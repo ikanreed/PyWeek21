@@ -6,10 +6,12 @@ class Area:
         self.activeobject=None
         self.name="Nowhere in particular"
     def click(self):
+        if self.activeobject :
+            self.activeobject.action(self.game.item)
         pass
     def right_click(self):
         pass
-        
+
     def draw(self):
         if self.background:
             self.game.window.blit(self.background,(0,94))

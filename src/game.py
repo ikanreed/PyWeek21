@@ -1,6 +1,7 @@
 import pygame, sys
 from pygame.locals import *
 from areas.gym import Gym
+from areas.hall import Hall
 from menus.mainmenu import MainMenu
 
 pygame.init()
@@ -16,13 +17,14 @@ class Game:
         self.window.set_colorkey((20,60,80))
         self.area=None
         self.menu=MainMenu(self)
+        self.item=None
         self.inventory=[]
         self.completedflags=[]
         self.areas={}
         self.activecutscene=None
         self.ticks=0
         self.frames=0
-        
+
     def run(self):
         while True:
             self.window.blit(self.mainbackground,(0,0))
@@ -75,8 +77,8 @@ class Game:
             self.frame=self.ticks//3
             pygame.display.update()
             self.clock.tick(30)
-        
-        
+
+
     def backgroundimage(self, name):
         return pygame.image.load('../graphics/backgrounds/%s.png'%name)
     def sprite(self, name, frames=0):
@@ -88,7 +90,12 @@ class Game:
         pass
     def describeItem(self,pos):
         pass
-        
+
+    def changeArea(self,new):
+        self.area=self.areas[new]
+
+        pass
+
 if __name__=="__main__":
 	game=Game()
 	game.run()

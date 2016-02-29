@@ -42,7 +42,7 @@ class MainMenu:
             index+=1
         self.highlightindex=None
     def new(self):
-        self.game.areas={'Gym':gym.Gym(self.game)}
+        self.game.areas={'Gym':gym.Gym(self.game), 'Hall':hall.Hall(self.game)}
         self.game.inventory=[]
         self.game.area=self.game.areas['Gym']
         self.game.menu=None
