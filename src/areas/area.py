@@ -4,10 +4,20 @@ class Area:
         self.background=None
         self.objects=[]
         self.activeobject=None
+        self.showprotagonist=False
         self.name="Nowhere in particular"
     def click(self):
         if self.activeobject :
-            self.activeobject.action(self.game.item)
+            if self.showprotagonist:
+                #have the protagonist walk to the target THEN use it
+                self.game.protagonist.target=self.activeobject.rect.center
+                self.game.protagonist.endaction=self.activeobject.action
+                self.game.protagonist.enditem=self.game.item
+            else:
+                self.activeobject.action(self.game.item)
+        elif self.showprotagonist:
+            x,y=self.game.lastpos
+            self.game.protagonist.target=(x-self.game.gamearea.left,y-self.game.gamearea.top)
         pass
     def right_click(self):
         pass
@@ -19,6 +29,8 @@ class Area:
             rect=object.rect.copy()
             rect.top+=94
             self.game.window.blit(object.animation[self.game.frame%len(object.animation)], rect)
+        if self.showprotagonist:
+            self.game.protagonist.draw()
     def mousemove(self,x,y):
         y=y-94
         for object in self.objects:

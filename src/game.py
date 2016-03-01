@@ -3,6 +3,7 @@ from pygame.locals import *
 from areas.gym import Gym
 from areas.hall import Hall
 from menus.mainmenu import MainMenu
+from objects.protagonist import Protagonist
 
 pygame.init()
 
@@ -22,6 +23,7 @@ class Game:
         self.completedflags=[]
         self.areas={}
         self.activecutscene=None
+        self.protagonist=Protagonist(self)
         self.ticks=0
         self.frames=0
 
@@ -73,6 +75,7 @@ class Game:
                 self.menu.draw()
             elif self.area:
                 self.area.draw()
+                self.protagonist.update()
             self.ticks+=1
             self.frame=self.ticks//3
             pygame.display.update()
@@ -91,10 +94,10 @@ class Game:
     def describeItem(self,pos):
         pass
 
-    def changeArea(self,new):
+    def changeArea(self,new, pos=None):
         self.area=self.areas[new]
-
-        pass
+        if pos:
+            self.protagonist.pos=pos
 
 if __name__=="__main__":
 	game=Game()
